@@ -27,7 +27,7 @@ const Query = objectType({
     t.nullable.field('postById', {
       type: 'Post',
       args: {
-        id: intArg(),
+        id: stringArg(),
       },
       resolve: (_parent, args, context: Context) => {
         return context.prisma.post.findUnique({
@@ -149,7 +149,7 @@ const Mutation = objectType({
     t.field('togglePublishPost', {
       type: 'Post',
       args: {
-        id: nonNull(intArg()),
+        id: nonNull(stringArg()),
       },
       resolve: async (_, args, context: Context) => {
         try {
@@ -174,7 +174,7 @@ const Mutation = objectType({
     t.field('incrementPostViewCount', {
       type: 'Post',
       args: {
-        id: nonNull(intArg()),
+        id: nonNull(stringArg()),
       },
       resolve: (_, args, context: Context) => {
         return context.prisma.post.update({
@@ -191,7 +191,7 @@ const Mutation = objectType({
     t.field('deletePost', {
       type: 'Post',
       args: {
-        id: nonNull(intArg()),
+        id: nonNull(stringArg()),
       },
       resolve: (_, args, context: Context) => {
         return context.prisma.post.delete({
@@ -205,7 +205,7 @@ const Mutation = objectType({
 const User = objectType({
   name: 'User',
   definition(t) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.string('name')
     t.nonNull.string('email')
     t.nonNull.list.nonNull.field('posts', {
@@ -224,7 +224,7 @@ const User = objectType({
 const Post = objectType({
   name: 'Post',
   definition(t) {
-    t.nonNull.int('id')
+    t.nonNull.string('id')
     t.nonNull.field('createdAt', { type: 'DateTime' })
     t.nonNull.field('updatedAt', { type: 'DateTime' })
     t.nonNull.string('title')
@@ -259,7 +259,7 @@ const PostOrderByUpdatedAtInput = inputObjectType({
 const UserUniqueInput = inputObjectType({
   name: 'UserUniqueInput',
   definition(t) {
-    t.int('id')
+    t.string('id')
     t.string('email')
   },
 })

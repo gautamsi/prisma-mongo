@@ -9,17 +9,17 @@ scalar DateTime
 
 type Mutation {
   createDraft(authorEmail: String!, data: PostCreateInput!): Post
-  deletePost(id: Int!): Post
-  incrementPostViewCount(id: Int!): Post
+  deletePost(id: String!): Post
+  incrementPostViewCount(id: String!): Post
   signupUser(data: UserCreateInput!): User!
-  togglePublishPost(id: Int!): Post
+  togglePublishPost(id: String!): Post
 }
 
 type Post {
   author: User
   content: String
   createdAt: DateTime!
-  id: Int!
+  id: String!
   published: Boolean!
   title: String!
   updatedAt: DateTime!
@@ -39,7 +39,7 @@ type Query {
   allUsers: [User!]!
   draftsByUser(userUniqueInput: UserUniqueInput!): [Post]
   feed(orderBy: PostOrderByUpdatedAtInput, searchString: String, skip: Int, take: Int): [Post!]!
-  postById(id: Int): Post
+  postById(id: String): Post
 }
 
 enum SortOrder {
@@ -49,7 +49,7 @@ enum SortOrder {
 
 type User {
   email: String!
-  id: Int!
+  id: String!
   name: String
   posts: [Post!]!
 }
@@ -62,5 +62,5 @@ input UserCreateInput {
 
 input UserUniqueInput {
   email: String
-  id: Int
+  id: String
 }

@@ -18,33 +18,16 @@ This example shows how to implement a **GraphQL server with TypeScript** with th
 
 ## Getting started
 
-### 1. Download example and install dependencies
-
-Download this example:
+### 1. Clone this repository:
 
 ```
-curl https://codeload.github.com/prisma/prisma-examples/tar.gz/latest | tar -xz --strip=2 prisma-examples-latest/typescript/graphql
+git clone git@github.com:gautamsi/prisma-mongo.git --depth=1
 ```
 
 Install npm dependencies:
 
 ```
-cd graphql
-npm install
-```
-
-<details><summary><strong>Alternative:</strong> Clone the entire repo</summary>
-
-Clone this repository:
-
-```
-git clone git@github.com:prisma/prisma-examples.git --depth=1
-```
-
-Install npm dependencies:
-
-```
-cd prisma-examples/typescript/graphql
+cd prisma-mongodb
 npm install
 ```
 
@@ -52,11 +35,12 @@ npm install
 
 ### 2. Create and seed the database
 
-Run the following command to create your SQLite database file. This also creates the `User` and `Post` tables that are defined in [`prisma/schema.prisma`](./prisma/schema.prisma):
+Run the following command to initialize your MongoDB database file. This also creates the `User` and `Post` collections that are defined in [`prisma/schema.prisma`](./prisma/schema.prisma):
 
 ```
-npx prisma migrate dev --name init
+npx prisma db push --preview-feature
 ```
+
 
 Now, seed the database with the sample data in [`prisma/seed.ts`](./prisma/seed.ts) by running the following command:
 
@@ -288,7 +272,7 @@ Evolving the application typically requires two steps:
 
 For the following example scenario, assume you want to add a "profile" feature to the app where users can create a profile and write a short bio about themselves.
 
-### 1. Migrate your database using Prisma Migrate
+### 1. Migrate your database using Prisma Migrate -- Does not work for Mongo
 
 The first step is to add a new table, e.g. called `Profile`, to the database. You can do this by adding a new model to your [Prisma schema file](./prisma/schema.prisma) file and then running a migration afterwards:
 
